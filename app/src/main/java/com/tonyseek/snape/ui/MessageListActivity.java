@@ -1,9 +1,11 @@
-package com.tonyseek.snape;
+package com.tonyseek.snape.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.tonyseek.snape.R;
 
 
 public class MessageListActivity extends Activity {
