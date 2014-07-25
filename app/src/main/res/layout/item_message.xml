@@ -4,12 +4,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/listview_horizontal_padding"
+    android:paddingRight="@dimen/listview_horizontal_padding"
+    android:paddingTop="@dimen/listview_vertical_padding"
+    android:paddingBottom="@dimen/listview_vertical_padding">
     <ImageView
         android:id="@id/item_message_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:padding="12dp" />
+        android:layout_centerVertical="true"
+        android:background="@android:color/holo_red_dark"
+        android:layout_margin="@dimen/listview_vertical_padding" />
     <TextView
         android:id="@id/item_message_person"
         android:layout_width="match_parent"
@@ -24,6 +30,8 @@
         android:layout_below="@id/item_message_person"
         android:layout_toRightOf="@id/item_message_avatar"
         android:layout_alignBottom="@id/item_message_avatar"
+        android:textAlignment="gravity"
+        android:gravity="bottom"
         android:singleLine="true"
         android:ellipsize="end"
         tools:text="Tom Riddle created his first Horcrux using a ring owned by his maternal grandfather." />
