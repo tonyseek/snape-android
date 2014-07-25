@@ -31,18 +31,22 @@ public class SmsGateway {
         "_id", "address", "person", "body", "date", "type"
     };
 
-    private ContentResolver mContentResolver;
+    private Context mContext;
 
     public SmsGateway(Context context) {
-        mContentResolver = context.getContentResolver();
+        mContext = context;
     }
 
     public List<SmsMessage> queryInbox(SortOrder sortOrder) {
         return query(mInboxQueryUri, sortOrder.getStatement());
     }
 
+    protected ContentResolver getContentResolver() {
+        return mContext.getContentResolver();
+    }
+
     protected List<SmsMessage> query(Uri uri, String sortOrder) {
-        Cursor cursor = mContentResolver.query(uri, mColumns, null, null, sortOrder);
+        Cursor cursor = getContentResolver().query(uri, mColumns, null, null, sortOrder);
         List<SmsMessage> resultSet = new ArrayList<SmsMessage>();
 
         if (!cursor.moveToFirst()) {
