@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- activity: message list -->
+    <item name="message_list" type="id" />
+
+    <!-- item: message -->
+    <item name="item_message_avatar" type="id" />
+    <item name="item_message_person" type="id" />
+    <item name="item_message_text" type="id" />
+</resources>
