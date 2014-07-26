@@ -53,11 +53,11 @@ public class SmsMessage {
         return address;
     }
 
-    public int getPerson() {
+    public int getPersonId() {
         return person;
     }
 
-    public String getBody() {
+    public String getTextBody() {
         return body;
     }
 

@@ -80,8 +80,8 @@ public class SmsMessageAdapter extends BaseAdapter {
 
         public void invalidate() {
             SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
-            mPersonView.setText(String.valueOf(smsMessage.getPerson()));
-            mTextView.setText(smsMessage.getBody());
+            mPersonView.setText(String.valueOf(smsMessage.getPersonId()));
+            mTextView.setText(smsMessage.getTextBody());
         }
     }
 }
