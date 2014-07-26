@@ -14,33 +14,39 @@ import java.io.InputStream;
 
 public class ContactGateway extends BaseGateway {
     private final static String[] mColumns = new String[] {
-        ContactsContract.Contacts._ID,
-        ContactsContract.Contacts.DISPLAY_NAME,
+        ContactsContract.RawContacts._ID,
+        ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY,
+        ContactsContract.RawContacts.CONTACT_ID,
     };
 
     public ContactGateway(Context context) {
         super(context);
     }
 
-    public ContactData getContactData(int contactId) {
-        Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
-        Cursor cursor = getContentResolver().query(uri, mColumns, null, null, null);
+    public ContactData getRawContact(int personId) {
+        Uri uri = ContactsContract.RawContacts.CONTENT_URI;
+        String selection = ContactsContract.RawContacts._ID + " = ?";
+        String[] selectionArgs = new String[] { String.valueOf(personId) };
+
+        Cursor cursor = getContentResolver().query(uri, mColumns, selection, selectionArgs, null);
 
         if (!cursor.moveToFirst()) {
-            return new ContactData(0, "", Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_4444));
+            return new ContactData(0, "", null);
         }
 
-        int indexId = cursor.getColumnIndex(ContactsContract.Contacts._ID);
-        int indexDisplayName = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+        int indexId = cursor.getColumnIndex(mColumns[0]);
+        int indexDisplayName = cursor.getColumnIndex(mColumns[1]);
+        int indexContactId = cursor.getColumnIndex(mColumns[2]);
 
         int id = cursor.getInt(indexId);
         String displayName = cursor.getString(indexDisplayName);
-        Bitmap contactPhoto = getContactPhoto(uri);
+        int contactId = cursor.getInt(indexContactId);
 
-        return new ContactData(id, displayName, contactPhoto);
+        return new ContactData(id, displayName, getContactPhoto(contactId));
     }
 
-    protected Bitmap getContactPhoto(Uri uri) {
+    protected Bitmap getContactPhoto(int contactId) {
+        Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         InputStream is = ContactsContract.Contacts.openContactPhotoInputStream(
             getContentResolver(), uri);
         Bitmap contactPhoto = BitmapFactory.decodeStream(is);

@@ -11,6 +11,7 @@
     android:paddingBottom="@dimen/listview_vertical_padding">
     <ImageView
         android:id="@id/item_message_avatar"
+        android:src="@drawable/ic_contact_picture"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerVertical="true"

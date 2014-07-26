@@ -1,6 +1,7 @@
 package com.tonyseek.snape.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,14 +85,19 @@ public class SmsMessageAdapter extends BaseAdapter {
 
         public void invalidate() {
             SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
-            ContactData contactData = mContactGateway.getContactData(smsMessage.getPersonId());
+            ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
+            Bitmap contactPhoto = contactData.getPhoto();
 
             if (contactData.getId() == 0) {
                 mPersonView.setText(smsMessage.getAddress());
             } else {
                 mPersonView.setText(contactData.getDisplayName());
             }
-            mAvatarView.setImageBitmap(contactData.getPhoto());
+
+            if (contactPhoto != null) {
+                mAvatarView.setImageBitmap(contactData.getPhoto());
+            }
+
             mTextView.setText(smsMessage.getTextBody());
         }
     }
