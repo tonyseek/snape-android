@@ -42,7 +42,7 @@ public class SmsMessage {
         if (other instanceof SmsMessage) {
             return ((SmsMessage) other).id == id;
         }
-        return super.equals(id);
+        return super.equals(other);
     }
 
     public int getId() {
