@@ -27,11 +27,8 @@
         android:id="@id/item_message_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_message_person"
         android:layout_toRightOf="@id/item_message_avatar"
         android:layout_alignBottom="@id/item_message_avatar"
-        android:textAlignment="gravity"
-        android:gravity="bottom"
         android:singleLine="true"
         android:ellipsize="end"
         tools:text="Tom Riddle created his first Horcrux using a ring owned by his maternal grandfather." />
