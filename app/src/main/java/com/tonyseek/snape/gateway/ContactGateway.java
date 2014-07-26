@@ -30,19 +30,23 @@ public class ContactGateway extends BaseGateway {
 
         Cursor cursor = getContentResolver().query(uri, mColumns, selection, selectionArgs, null);
 
-        if (!cursor.moveToFirst()) {
-            return new ContactData(0, "", null);
+        try {
+            if (!cursor.moveToFirst()) {
+                return new ContactData(0, "", null);
+            }
+
+            int indexId = cursor.getColumnIndex(mColumns[0]);
+            int indexDisplayName = cursor.getColumnIndex(mColumns[1]);
+            int indexContactId = cursor.getColumnIndex(mColumns[2]);
+
+            int id = cursor.getInt(indexId);
+            String displayName = cursor.getString(indexDisplayName);
+            int contactId = cursor.getInt(indexContactId);
+
+            return new ContactData(id, displayName, getContactPhoto(contactId));
+        } finally {
+            cursor.close();
         }
-
-        int indexId = cursor.getColumnIndex(mColumns[0]);
-        int indexDisplayName = cursor.getColumnIndex(mColumns[1]);
-        int indexContactId = cursor.getColumnIndex(mColumns[2]);
-
-        int id = cursor.getInt(indexId);
-        String displayName = cursor.getString(indexDisplayName);
-        int contactId = cursor.getInt(indexContactId);
-
-        return new ContactData(id, displayName, getContactPhoto(contactId));
     }
 
     protected Bitmap getContactPhoto(int contactId) {

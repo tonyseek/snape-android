@@ -43,15 +43,19 @@ public class SmsGateway extends BaseGateway {
         Cursor cursor = getContentResolver().query(uri, mColumns, null, null, sortOrder);
         List<SmsMessage> resultSet = new ArrayList<SmsMessage>();
 
-        if (!cursor.moveToFirst()) {
+        try {
+            if (!cursor.moveToFirst()) {
+                return resultSet;
+            }
+
+            do {
+                resultSet.add(fetch(cursor));
+            } while (cursor.moveToNext());
+
             return resultSet;
+        } finally {
+            cursor.close();
         }
-
-        do {
-            resultSet.add(fetch(cursor));
-        } while (cursor.moveToNext());
-
-        return resultSet;
     }
 
     protected SmsMessage fetch(Cursor cursor) {
