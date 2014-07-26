@@ -55,12 +55,12 @@ public class SmsGateway extends BaseGateway {
     }
 
     protected SmsMessage fetch(Cursor cursor) {
-        int id = cursor.getInt(cursor.getColumnIndex("_id"));
-        String address = cursor.getString(cursor.getColumnIndex("address"));
-        int person = cursor.getInt(cursor.getColumnIndex("person"));
-        String body = cursor.getString(cursor.getColumnIndex("body"));
-        long dateAsLong = cursor.getLong(cursor.getColumnIndex("date"));
-        int typeAsInt = cursor.getInt(cursor.getColumnIndex("type"));
+        int id = cursor.getInt(cursor.getColumnIndex(mColumns[0]));
+        String address = cursor.getString(cursor.getColumnIndex(mColumns[1]));
+        int person = cursor.getInt(cursor.getColumnIndex(mColumns[2]));
+        String body = cursor.getString(cursor.getColumnIndex(mColumns[3]));
+        long dateAsLong = cursor.getLong(cursor.getColumnIndex(mColumns[4]));
+        int typeAsInt = cursor.getInt(cursor.getColumnIndex(mColumns[5]));
 
         Date date = new Date(dateAsLong);
         SmsMessage.Type type = SmsMessage.Type.fromInt(typeAsInt);
