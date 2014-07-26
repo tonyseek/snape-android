@@ -18,11 +18,18 @@
         android:layout_margin="@dimen/listview_vertical_padding" />
     <TextView
         android:id="@id/item_message_person"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/item_message_avatar"
         android:layout_alignTop="@id/item_message_avatar"
         tools:text="Severus Snape" />
+    <TextView
+        android:id="@id/item_message_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/item_message_text"
+        android:layout_alignBaseline="@id/item_message_person"
+        tools:text="2012-12-12 12:12" />
     <TextView
         android:id="@id/item_message_text"
         android:layout_width="match_parent"

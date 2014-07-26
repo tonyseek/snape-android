@@ -13,6 +13,7 @@ import com.tonyseek.snape.R;
 import com.tonyseek.snape.gateway.ContactGateway;
 import com.tonyseek.snape.model.ContactData;
 import com.tonyseek.snape.model.SmsMessage;
+import com.tonyseek.snape.utility.DateUtility;
 
 import java.util.List;
 
@@ -78,6 +79,9 @@ public class SmsMessageAdapter extends BaseAdapter {
         @InjectView(R.id.item_message_text)
         TextView mTextView;
 
+        @InjectView(R.id.item_message_date)
+        TextView mDateView;
+
         ViewHolder(View view, int position) {
             mPosition = position;
             ButterKnife.inject(this, view);
@@ -87,6 +91,8 @@ public class SmsMessageAdapter extends BaseAdapter {
             SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
             ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
             Bitmap contactPhoto = contactData.getPhoto();
+            String displayDate = DateUtility.formatDate(
+                    smsMessage.getDate(), DateUtility.Format.SIMPLE_DATETIME);
 
             if (contactData.getId() == 0) {
                 mPersonView.setText(smsMessage.getAddress());
@@ -99,6 +105,7 @@ public class SmsMessageAdapter extends BaseAdapter {
             }
 
             mTextView.setText(smsMessage.getTextBody());
+            mDateView.setText(displayDate);
         }
     }
 }

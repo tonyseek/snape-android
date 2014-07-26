@@ -7,4 +7,5 @@
     <item name="item_message_avatar" type="id" />
     <item name="item_message_person" type="id" />
     <item name="item_message_text" type="id" />
+    <item name="item_message_date" type="id" />
 </resources>
