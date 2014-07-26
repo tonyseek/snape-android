@@ -1,6 +1,5 @@
 package com.tonyseek.snape.gateway;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SmsGateway {
+public class SmsGateway extends BaseGateway {
     public enum SortOrder {
         DATE_DESC("date desc");
 
@@ -31,19 +30,14 @@ public class SmsGateway {
         "_id", "address", "person", "body", "date", "type"
     };
 
-    private Context mContext;
-
     public SmsGateway(Context context) {
-        mContext = context;
+        super(context);
     }
 
     public List<SmsMessage> queryInbox(SortOrder sortOrder) {
         return query(mInboxQueryUri, sortOrder.getStatement());
     }
 
-    protected ContentResolver getContentResolver() {
-        return mContext.getContentResolver();
-    }
 
     protected List<SmsMessage> query(Uri uri, String sortOrder) {
         Cursor cursor = getContentResolver().query(uri, mColumns, null, null, sortOrder);
