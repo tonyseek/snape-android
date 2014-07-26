@@ -11,10 +11,10 @@
     android:paddingBottom="@dimen/listview_vertical_padding">
     <ImageView
         android:id="@id/item_message_avatar"
+        android:src="@drawable/ic_contact_picture"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerVertical="true"
-        android:background="@android:color/holo_red_dark"
         android:layout_margin="@dimen/listview_vertical_padding" />
     <TextView
         android:id="@id/item_message_person"

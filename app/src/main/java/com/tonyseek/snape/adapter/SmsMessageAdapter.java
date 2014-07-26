@@ -1,6 +1,7 @@
 package com.tonyseek.snape.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tonyseek.snape.R;
+import com.tonyseek.snape.gateway.ContactGateway;
+import com.tonyseek.snape.model.ContactData;
 import com.tonyseek.snape.model.SmsMessage;
 
 import java.util.List;
@@ -20,11 +23,13 @@ public class SmsMessageAdapter extends BaseAdapter {
     private Context mContext;
     private List<SmsMessage> mObjects;
     private LayoutInflater mInflater;
+    private ContactGateway mContactGateway;
 
     public SmsMessageAdapter(Context context, List<SmsMessage> objects) {
         mContext = context;
         mObjects = objects;
         mInflater = LayoutInflater.from(mContext);
+        mContactGateway = new ContactGateway(mContext);
     }
 
     @Override
@@ -80,8 +85,20 @@ public class SmsMessageAdapter extends BaseAdapter {
 
         public void invalidate() {
             SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
-            mPersonView.setText(String.valueOf(smsMessage.getPerson()));
-            mTextView.setText(smsMessage.getBody());
+            ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
+            Bitmap contactPhoto = contactData.getPhoto();
+
+            if (contactData.getId() == 0) {
+                mPersonView.setText(smsMessage.getAddress());
+            } else {
+                mPersonView.setText(contactData.getDisplayName());
+            }
+
+            if (contactPhoto != null) {
+                mAvatarView.setImageBitmap(contactData.getPhoto());
+            }
+
+            mTextView.setText(smsMessage.getTextBody());
         }
     }
 }
