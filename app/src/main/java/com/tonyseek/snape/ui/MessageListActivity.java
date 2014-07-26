@@ -27,6 +27,8 @@ public class MessageListActivity extends Activity {
         @Override
         public void run() {
             mSmsMessageList = mSmsGateway.queryInbox(SmsGateway.SortOrder.DATE_DESC);
+            // TODO use the user's preference value instead of hard coding value
+            mSmsMessageList.subList(0, Math.max(20, mSmsMessageList.size()));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
