@@ -19,8 +19,10 @@ import butterknife.InjectView;
 
 public class MessageListActivity extends Activity {
     private SmsGateway mSmsGateway = new SmsGateway(this);
+
     private List<SmsMessage> mSmsMessageList;
     private SmsMessageAdapter mSmsMessageListAdapter;
+
     private Runnable mInboxUpdater = new Runnable() {
         @Override
         public void run() {
