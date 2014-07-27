@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">短信滥用报告</string>
     <string name="action_settings">设置</string>
+
+    <string name="message_unknown_person">未知号码</string>
+    <string name="message_report">立即举报</string>
+    <string name="message_enqueue">加入待举报队列</string>
 </resources>

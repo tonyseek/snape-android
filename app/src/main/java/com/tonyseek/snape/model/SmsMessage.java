@@ -1,8 +1,11 @@
 package com.tonyseek.snape.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class SmsMessage {
+public class SmsMessage implements Parcelable {
     public enum Type {
         RECEIVED, SENT, UNKNOWN;
 
@@ -80,4 +83,40 @@ public class SmsMessage {
             ", type=" + type +
             '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.address);
+        dest.writeInt(this.person);
+        dest.writeString(this.body);
+        dest.writeLong(date != null ? date.getTime() : -1);
+        dest.writeInt(this.type == null ? -1 : this.type.ordinal());
+    }
+
+    private SmsMessage(Parcel in) {
+        this.id = in.readInt();
+        this.address = in.readString();
+        this.person = in.readInt();
+        this.body = in.readString();
+        long tmpDate = in.readLong();
+        this.date = tmpDate == -1 ? null : new Date(tmpDate);
+        int tmpType = in.readInt();
+        this.type = tmpType == -1 ? null : Type.values()[tmpType];
+    }
+
+    public static final Parcelable.Creator<SmsMessage> CREATOR = new Parcelable.Creator<SmsMessage>() {
+        public SmsMessage createFromParcel(Parcel source) {
+            return new SmsMessage(source);
+        }
+
+        public SmsMessage[] newArray(int size) {
+            return new SmsMessage[size];
+        }
+    };
 }

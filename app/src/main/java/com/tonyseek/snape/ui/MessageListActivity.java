@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tonyseek.snape.R;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 
 public class MessageListActivity extends Activity {
@@ -64,6 +67,13 @@ public class MessageListActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @OnItemClick(R.id.message_list)
+    public void onMessageClick(AdapterView <?> parent, View view, int position, long id) {
+        SmsMessage smsMessage = (SmsMessage) mSmsMessageListAdapter.getItem(position);
+        MessageFragment fragment = MessageFragment.getInstance(smsMessage);
+        fragment.show(getFragmentManager(), MessageFragment.class.getName());
     }
 
     protected void invalidate() {
