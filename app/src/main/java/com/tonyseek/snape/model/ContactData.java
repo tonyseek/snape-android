@@ -18,7 +18,7 @@ public class ContactData {
         if (other instanceof ContactData) {
             return ((ContactData) other).id == id;
         }
-        return super.equals(id);
+        return super.equals(other);
     }
 
     public int getId() {
