@@ -27,6 +27,8 @@ public class MessageListActivity extends Activity {
         @Override
         public void run() {
             mSmsMessageList = mSmsGateway.queryInbox(SmsGateway.SortOrder.DATE_DESC);
+            // TODO use the user's preference value instead of hard coding value
+            mSmsMessageList = mSmsMessageList.subList(0, Math.min(100, mSmsMessageList.size()));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -65,11 +67,7 @@ public class MessageListActivity extends Activity {
     }
 
     protected void invalidate() {
-        if (mSmsMessageListAdapter == null) {
-            mSmsMessageListAdapter = new SmsMessageAdapter(this, mSmsMessageList);
-            mSmsMessageListView.setAdapter(mSmsMessageListAdapter);
-        } else {
-            mSmsMessageListAdapter.notifyDataSetChanged();
-        }
+        mSmsMessageListAdapter = new SmsMessageAdapter(this, mSmsMessageList);
+        mSmsMessageListView.setAdapter(mSmsMessageListAdapter);
     }
 }

@@ -11,28 +11,38 @@
     android:paddingBottom="@dimen/listview_vertical_padding">
     <ImageView
         android:id="@id/item_message_avatar"
-        android:src="@drawable/ic_contact_picture"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/listview_vertical_padding" />
+        android:layout_margin="@dimen/listview_vertical_padding"
+        tools:src="@drawable/ic_contact_picture" />
     <TextView
         android:id="@id/item_message_person"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/item_message_avatar"
         android:layout_alignTop="@id/item_message_avatar"
+        android:textSize="@dimen/item_message_text_primary"
+        android:textColor="@color/text_gray"
         tools:text="Severus Snape" />
+    <TextView
+        android:id="@id/item_message_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/item_message_text"
+        android:layout_alignBaseline="@id/item_message_person"
+        android:textSize="@dimen/item_message_text_tertiary"
+        android:textColor="@color/text_gray"
+        tools:text="2012-12-12 12:12" />
     <TextView
         android:id="@id/item_message_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_message_person"
         android:layout_toRightOf="@id/item_message_avatar"
         android:layout_alignBottom="@id/item_message_avatar"
-        android:textAlignment="gravity"
-        android:gravity="bottom"
         android:singleLine="true"
         android:ellipsize="end"
+        android:textSize="@dimen/item_message_text_secondary"
+        android:textColor="@color/text_gray"
         tools:text="Tom Riddle created his first Horcrux using a ring owned by his maternal grandfather." />
 </RelativeLayout>

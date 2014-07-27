@@ -2,6 +2,7 @@ package com.tonyseek.snape.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,21 +55,21 @@ public class SmsMessageAdapter extends BaseAdapter {
 
         if (convertView == null) {
             view = mInflater.inflate(R.layout.item_message, null);
-            holder = new ViewHolder(view, position);
+            holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             view = convertView;
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.invalidate();
+        SmsMessage smsMessage = (SmsMessage) getItem(position);
+        ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
+        holder.update(mContext, smsMessage, contactData);
 
         return view;
     }
 
-    class ViewHolder {
-        private int mPosition;
-
+    static class ViewHolder {
         @InjectView(R.id.item_message_avatar)
         ImageView mAvatarView;
 
@@ -78,15 +79,17 @@ public class SmsMessageAdapter extends BaseAdapter {
         @InjectView(R.id.item_message_text)
         TextView mTextView;
 
-        ViewHolder(View view, int position) {
-            mPosition = position;
+        @InjectView(R.id.item_message_date)
+        TextView mDateView;
+
+        ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }
 
-        public void invalidate() {
-            SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
-            ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
+        void update(Context context, SmsMessage smsMessage, ContactData contactData) {
             Bitmap contactPhoto = contactData.getPhoto();
+            CharSequence displayDate = DateUtils.getRelativeTimeSpanString(
+                context, smsMessage.getDate().getTime());
 
             if (contactData.getId() == 0) {
                 mPersonView.setText(smsMessage.getAddress());
@@ -94,11 +97,14 @@ public class SmsMessageAdapter extends BaseAdapter {
                 mPersonView.setText(contactData.getDisplayName());
             }
 
-            if (contactPhoto != null) {
-                mAvatarView.setImageBitmap(contactData.getPhoto());
+            if (contactPhoto == null) {
+                mAvatarView.setImageResource(R.drawable.ic_contact_picture);
+            } else {
+                mAvatarView.setImageBitmap(contactPhoto);
             }
 
             mTextView.setText(smsMessage.getTextBody());
+            mDateView.setText(displayDate);
         }
     }
 }
