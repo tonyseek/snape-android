@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">短信滥用报告</string>
     <string name="action_settings">设置</string>
+    <string name="contact_unknown_address">未知号码</string>
 </resources>

@@ -1,8 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin">
+        <ImageView
+            android:id="@id/message_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            tools:src="@drawable/ic_contact_picture" />
+        <TextView
+            android:id="@id/message_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/message_avatar"
+            android:layout_alignTop="@id/message_avatar"
+            android:textSize="@dimen/item_message_text_primary"
+            android:textColor="@color/text_gray"
+            tools:text="Severus Snape" />
+        <TextView
+            android:id="@id/message_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/message_avatar"
+            android:layout_alignBottom="@id/message_avatar"
+            android:textSize="@dimen/item_message_text_secondary"
+            android:textColor="@color/text_gray"
+            tools:text="+86 138 0013 8000" />
+        <TextView
+            android:id="@id/message_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/message_avatar"
+            android:textSize="@dimen/item_message_text_tertiary"
+            android:textColor="@color/text_gray"
+            tools:text="12-12" />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/holo_blue_light">
+    </FrameLayout>
+    <TextView
+        android:id="@id/message_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_vertical_margin"
+        tools:text="Tom Riddle created his first Horcrux using a ring owned by his maternal grandfather." />
+</LinearLayout>
