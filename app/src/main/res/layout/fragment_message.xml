@@ -45,15 +45,42 @@
             android:textColor="@color/text_gray"
             tools:text="12-12" />
     </RelativeLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/holo_blue_light">
     </FrameLayout>
+
     <TextView
         android:id="@id/message_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:padding="@dimen/activity_vertical_margin"
+        android:textColor="@color/text_gray"
         tools:text="Tom Riddle created his first Horcrux using a ring owned by his maternal grandfather." />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@id/message_button_report"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/message_report"
+            android:textColor="@color/text_gray" />
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@id/message_button_report"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/message_enqueue"
+            android:textColor="@color/text_gray" />
+    </LinearLayout>
 </LinearLayout>

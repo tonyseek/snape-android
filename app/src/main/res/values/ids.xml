@@ -9,6 +9,8 @@
     <item name="message_date" type="id" />
     <item name="message_text" type="id" />
     <item name="message_address" type="id" />
+    <item name="message_button_report" type="id" />
+    <item name="message_button_enqueue" type="id" />
 
     <!-- item: message -->
     <item name="item_message_avatar" type="id" />

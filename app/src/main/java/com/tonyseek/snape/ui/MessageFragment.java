@@ -17,6 +17,7 @@ import com.tonyseek.snape.model.SmsMessage;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MessageFragment extends DialogFragment {
     private final static String EXTRA_SMS_MESSAGE = "EXTRA_SMS_MESSAGE";
@@ -71,13 +72,23 @@ public class MessageFragment extends DialogFragment {
         return view;
     }
 
+    @OnClick(R.id.message_button_report)
+    public void onReportClick() {
+
+    }
+
+    @OnClick(R.id.message_button_enqueue)
+    public void onEnqueueClick() {
+
+    }
+
     protected void bindView() {
         Bitmap photo = mContactData.getPhoto();
         String displayDate = DateUtils.formatDateTime(
                 getActivity(), mSmsMessage.getDate().getTime(), DateUtils.FORMAT_ABBREV_ALL);
 
         if (mSmsMessage.getPersonId() == 0) {
-            mPersonView.setText(R.string.contact_unknown_address);
+            mPersonView.setText(R.string.message_unknown_person);
         } else {
             mPersonView.setText(mContactData.getDisplayName());
         }
