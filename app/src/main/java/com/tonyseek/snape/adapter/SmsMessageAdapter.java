@@ -2,6 +2,7 @@ package com.tonyseek.snape.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import com.tonyseek.snape.R;
 import com.tonyseek.snape.gateway.ContactGateway;
 import com.tonyseek.snape.model.ContactData;
 import com.tonyseek.snape.model.SmsMessage;
-import com.tonyseek.snape.utility.DateUtility;
 
 import java.util.List;
 
@@ -91,8 +91,8 @@ public class SmsMessageAdapter extends BaseAdapter {
             SmsMessage smsMessage = (SmsMessage) getItem(mPosition);
             ContactData contactData = mContactGateway.getRawContact(smsMessage.getPersonId());
             Bitmap contactPhoto = contactData.getPhoto();
-            String displayDate = DateUtility.formatDate(
-                    smsMessage.getDate(), DateUtility.Format.SIMPLE_DATETIME);
+            CharSequence displayDate = DateUtils.getRelativeTimeSpanString(
+                    mContext, smsMessage.getDate().getTime());
 
             if (contactData.getId() == 0) {
                 mPersonView.setText(smsMessage.getAddress());
